@@ -1,13 +1,8 @@
-import { Grid, Pagination } from "@mui/material";
-import { Box } from "@mui/system";
+import { Grid } from "@mui/material";
 import React from "react";
 import MovieCard from "./MovieCard";
 
-function MovieList({ movies, setCurrentPage, totalPage, currentPage }) {
-  const handleChange = (event, value) => {
-    console.log(value);
-    setCurrentPage(value);
-  };
+function MovieList({ movies }) {
   return (
     <>
       <Grid container spacing={2} mt={1}>
@@ -17,9 +12,6 @@ function MovieList({ movies, setCurrentPage, totalPage, currentPage }) {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 3, mb: 3 }}>
-        <Pagination count={totalPage} page={currentPage} onChange={handleChange} color="primary" />
-      </Box>
     </>
   );
 }

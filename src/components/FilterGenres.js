@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import tmdbApi from "../app/tmdbApi";
-import Context from "../context/Context";
+import Context from "../contexts/FilterContext";
 
-const FilterGenres = () => {
+const FilterGenres = ({movies}) => {
   const [genres, setGenres] = useState();
   const [idFilter, setIdFilter] = useState();
   useEffect(() => {

@@ -1,9 +1,11 @@
-import { Alert, Box, Container, Stack } from "@mui/material";
+import { Alert, Box, Container, Pagination, Stack } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import MovieList from "../components/MovieList";
 import LoadingScreen from "../components/LoadingScreen";
 import tmdbApi from "../app/tmdbApi";
 import FilterGenres from "../components/FilterGenres";
+import MovieSearch from "../components/MovieSearch";
+import MovieSort from "../components/MovieSort";
 
 function BrowsePage() {
   const [movies, setMovies] = useState([]);
@@ -31,30 +33,44 @@ function BrowsePage() {
     getMoviesList();
   }, [currentPage]);
 
+  const handleChange = (event, value) => {
+    console.log(value);
+    setCurrentPage(value);
+  };
+
   return (
-    <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
-      <FilterGenres/>
-      <Stack sx={{ flexGrow: 1 }}>
-        <Box sx={{ position: "relative", height: 1 }}>
-          {loading ? (
-            <LoadingScreen />
-          ) : (
-            <>
-              {error ? (
-                <Alert severity="error">{error}</Alert>
-              ) : (
-                <MovieList
-                  movies={movies}
-                  setCurrentPage={setCurrentPage}
-                  totalPage={totalPage}
-                  currentPage={currentPage}
-                />
-              )}
-            </>
-          )}
-        </Box>
-      </Stack>
-    </Container>
+    <>
+      {/* <MovieSearch/> */}
+      {/* <MovieSort/> */}
+      <FilterGenres movies={movies} />
+      <Container sx={{ display: "flex", minHeight: "100vh", mt: 3 }}>
+        <Stack sx={{ flexGrow: 1 }}>
+          <Box sx={{ position: "relative", height: 1 }}>
+            {loading ? (
+              <LoadingScreen />
+            ) : (
+              <>
+                {error ? (
+                  <Alert severity="error">{error}</Alert>
+                ) : (
+                  <MovieList
+                    movies={movies}
+                  />
+                )}
+              </>
+            )}
+          </Box>
+        </Stack>
+      </Container>
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 3, mb: 3 }}>
+        <Pagination
+          count={totalPage}
+          page={currentPage}
+          onChange={handleChange}
+          color="primary"
+        />
+      </Box>
+    </>
   );
 }
 

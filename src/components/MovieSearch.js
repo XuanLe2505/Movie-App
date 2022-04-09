@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useSearch from "../hooks/useSearch";
 import { Button, Stack, TextField } from "@mui/material";
 
