@@ -19,11 +19,14 @@
 import React from "react";
 import Router from "./routes";
 import { BrowserRouter } from "react-router-dom";
+import SortContextProvider from "./contexts/SortContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <Router />
+      <SortContextProvider>
+        <Router />
+      </SortContextProvider>
     </BrowserRouter>
   );
 }
